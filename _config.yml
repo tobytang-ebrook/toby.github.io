@@ -23,9 +23,4 @@ defaults:
     values:
       layout: "post"
       permalink: /posts/:title/
-  - scope:
-      path: "_blogs"
-    values:
-      layout: "blog"
-      permalink: /blogs/:title/
 exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]
