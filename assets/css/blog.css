@@ -32,11 +32,14 @@ header .site-title {
   font-size: 4rem;
   font-weight: bolder;
   line-height: 110%;
-  color: var(--white-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: var(--linear-gradient-text);
 }
 main {
   margin: 0 auto;
-  max-width: 650px;
+  max-width: 1024px;
   padding: 3rem 0;
 }
 
