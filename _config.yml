@@ -1,4 +1,4 @@
-title: Hello World!
+title: 你好，世界！
 markdown: kramdown
 
 # for atom feed
@@ -23,4 +23,9 @@ defaults:
     values:
       layout: "post"
       permalink: /posts/:title/
+  - scope:
+      path: "_blogs"
+    values:
+      layout: "blog"
+      permalink: /blogs/:title/
 exclude: ["sitemap.xml", "feed.xml", "LICENSE", "README.md"]
