@@ -1,0 +1,14 @@
+---
+import type { GetStaticPaths } from "astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { getKnowledge, type Knowledge } from "../../lib/content";
+
+export const getStaticPaths = (async () => {
+  const entries = await getKnowledge();
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props as { entry: Knowledge };
+---
+
+<ArticleLayout entry={entry} />

@@ -1,0 +1,39 @@
+# Topic tree. `parent` must reference another topic id.
+- id: magento
+  title: Magento
+- id: magento-cloud
+  title: Magento Cloud
+  parent: magento
+- id: magento-backend
+  title: Backend
+  parent: magento
+- id: magento-frontend
+  title: Frontend
+  parent: magento
+- id: magento-performance
+  title: Performance
+  parent: magento
+- id: php
+  title: PHP
+- id: linux
+  title: Linux
+- id: nginx
+  title: Nginx
+  parent: linux
+- id: mysql
+  title: MySQL
+- id: elasticsearch
+  title: Elasticsearch
+- id: docker
+  title: Docker
+- id: devops
+  title: DevOps
+- id: shopify
+  title: Shopify
+- id: ai
+  title: AI
+- id: ai-workflow
+  title: AI Workflow
+  parent: ai
+- id: astro
+  title: Astro

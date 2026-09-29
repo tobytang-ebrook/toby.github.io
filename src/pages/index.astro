@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { articleUrl, getKnowledge, getWorklogs, isoDate } from "../lib/content";
+
+const sections = [
+  { title: "Worklog", entries: await getWorklogs() },
+  { title: "Knowledge", entries: await getKnowledge() },
+];
+---
+
+<BaseLayout
+  title="Toby Worklog"
+  description="Engineering worklog, knowledge base and problem/solution archive."
+>
+  <h1>Toby Worklog</h1>
+  {
+    sections.map(({ title, entries }) => (
+      <section>
+        <h2>{title}</h2>
+        <ul>
+          {entries.map((entry) => (
+            <li>
+              <time datetime={isoDate(entry.data.date)}>{isoDate(entry.data.date)}</time>{" "}
+              <a href={articleUrl(entry)}>{entry.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import type { GetStaticPaths } from "astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import { getWorklogs, worklogSlug, type Worklog } from "../../lib/content";
+
+export const getStaticPaths = (async () => {
+  const entries = await getWorklogs();
+  return entries.map((entry) => ({
+    params: { slug: worklogSlug(entry) },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props as { entry: Worklog };
+---
+
+<ArticleLayout entry={entry} />

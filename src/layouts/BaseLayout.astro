@@ -1,0 +1,30 @@
+---
+// Minimal shell for PR #1: semantic HTML only, no styling yet.
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = "Toby Worklog";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title === siteTitle ? title : `${title} | ${siteTitle}`}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <header>
+      <a href="/">{siteTitle}</a>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

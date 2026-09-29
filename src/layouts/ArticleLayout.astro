@@ -1,0 +1,74 @@
+---
+import { getEntries, getEntry, render } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import { isoDate, type Article } from "../lib/content";
+
+interface Props {
+  entry: Article;
+}
+
+const { entry } = Astro.props;
+const { title, description, date, updated, status, tags } = entry.data;
+const { Content, headings } = await render(entry);
+const topics = await getEntries(entry.data.topics);
+const project = entry.data.project && (await getEntry(entry.data.project));
+const toc = headings.filter((h) => h.depth <= 3);
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header>
+      <p>{entry.collection}</p>
+      <h1>{title}</h1>
+      <p>{description}</p>
+      <dl>
+        <dt>Date</dt>
+        <dd><time datetime={isoDate(date)}>{isoDate(date)}</time></dd>
+        {
+          updated && (
+            <>
+              <dt>Updated</dt>
+              <dd><time datetime={isoDate(updated)}>{isoDate(updated)}</time></dd>
+            </>
+          )
+        }
+        <dt>Status</dt>
+        <dd>{status}</dd>
+        <dt>Topics</dt>
+        <dd>{topics.map((t) => t.data.title).join(" · ")}</dd>
+        {
+          project && (
+            <>
+              <dt>Project</dt>
+              <dd>{project.data.title}</dd>
+            </>
+          )
+        }
+        {
+          tags.length > 0 && (
+            <>
+              <dt>Tags</dt>
+              <dd>{tags.join(", ")}</dd>
+            </>
+          )
+        }
+      </dl>
+    </header>
+
+    {
+      toc.length > 0 && (
+        <nav aria-label="Contents">
+          <ul>
+            {toc.map((h) => (
+              <li data-depth={h.depth}>
+                <a href={`#${h.slug}`}>{h.text}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+
+    <Content />
+  </article>
+</BaseLayout>
